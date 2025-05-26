@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,63 +9,68 @@
     #cart {
       transition: opacity 0.3s ease;
     }
+    /* Custom scrollbar for cart */
+    #cart-items {
+      max-height: 200px;
+      overflow-y: auto;
+    }
   </style>
 </head>
-<body class="bg-white text-gray-800 font-sans">
+<body class="bg-gradient-to-tr from-pink-100 via-purple-100 to-blue-100 text-gray-800 font-sans">
 
   <!-- Header -->
-  <header class="p-4 border-b flex justify-between items-center">
-    <h1 class="text-2xl font-bold tracking-wide">LUXWEAR</h1>
+  <header class="p-6 border-b border-pink-300 flex justify-between items-center bg-white bg-opacity-80 shadow-md">
+    <h1 class="text-3xl font-extrabold tracking-wide text-pink-600">LUXWEAR</h1>
     <nav>
-      <ul class="flex space-x-4">
-        <li><a href="#home" class="hover:underline">Home</a></li>
-        <li><a href="#shop" class="hover:underline">Shop</a></li>
-        <li><button onclick="toggleCart()" class="hover:underline focus:outline-none">Cart (<span id="cart-count">0</span>)</button></li>
+      <ul class="flex space-x-8 text-lg font-semibold">
+        <li><a href="#home" class="hover:text-pink-600 transition">Home</a></li>
+        <li><a href="#shop" class="hover:text-pink-600 transition">Shop</a></li>
+        <li><button onclick="toggleCart()" class="hover:text-pink-600 transition focus:outline-none">Cart (<span id="cart-count">0</span>)</button></li>
       </ul>
     </nav>
   </header>
 
   <!-- Hero -->
-  <section id="home" class="text-center py-32 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1602810313325-6e47d38e9e6e?auto=format&fit=crop&w=1350&q=80');">
-    <div class="bg-white bg-opacity-70 inline-block p-8 rounded">
-      <h2 class="text-4xl font-bold mb-4">Effortless Style</h2>
-      <p class="text-gray-700 mb-6">Discover curated fashion essentials for everyday elegance.</p>
-      <a href="#shop" class="bg-black text-white py-2 px-6 rounded-full">Shop Now</a>
+  <section id="home" class="text-center py-36 bg-cover bg-center bg-no-repeat rounded-b-lg shadow-lg mx-8 mt-6" style="background-image: url('images/hero-bg.jpg');">
+    <div class="bg-white bg-opacity-90 inline-block p-10 rounded-xl shadow-lg max-w-3xl mx-auto">
+      <h2 class="text-5xl font-extrabold mb-6 text-pink-700 drop-shadow-lg">Effortless Style</h2>
+      <p class="text-gray-700 mb-8 text-xl">Discover curated fashion essentials for everyday elegance.</p>
+      <a href="#shop" class="bg-pink-600 hover:bg-pink-700 text-white py-3 px-8 rounded-full font-semibold transition-shadow shadow-md hover:shadow-lg inline-block">Shop Now</a>
     </div>
   </section>
 
   <!-- Products -->
-  <section id="shop" class="py-16 px-8">
-    <h3 class="text-3xl font-semibold mb-8 text-center">New Arrivals</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+  <section id="shop" class="py-20 px-12 max-w-7xl mx-auto">
+    <h3 class="text-4xl font-bold mb-12 text-center text-pink-700 tracking-wide">New Arrivals</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
 
       <!-- Product 1 -->
-      <div class="border rounded-lg overflow-hidden shadow-sm">
-        <img src="https://images.unsplash.com/photo-1602810313013-6aa32a12280f?auto=format&fit=crop&w=800&q=80" alt="Silk Slip Dress" class="w-full h-64 object-cover" />
-        <div class="p-4">
-          <h4 class="text-xl font-semibold mb-2">Silk Slip Dress</h4>
-          <p class="text-gray-600 mb-2">₦35,000</p>
-          <button class="bg-black text-white w-full py-2 mt-2" onclick="addToCart('Silk Slip Dress', 35000)">Add to Cart</button>
+      <div class="border rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow bg-white">
+        <img src="images/silk-slip-dress.jpg" alt="Silk Slip Dress" class="w-full h-72 object-cover" />
+        <div class="p-6">
+          <h4 class="text-2xl font-bold mb-3 text-pink-600">Silk Slip Dress</h4>
+          <p class="text-gray-700 mb-4 text-lg">₦35,000</p>
+          <button class="bg-pink-600 hover:bg-pink-700 text-white w-full py-3 rounded-lg font-semibold transition-colors" onclick="addToCart('Silk Slip Dress', 35000)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Product 2 -->
-      <div class="border rounded-lg overflow-hidden shadow-sm">
-        <img src="https://images.unsplash.com/photo-1589987607627-41d9d49eacd1?auto=format&fit=crop&w=800&q=80" alt="Leather Tote" class="w-full h-64 object-cover" />
-        <div class="p-4">
-          <h4 class="text-xl font-semibold mb-2">Leather Tote</h4>
-          <p class="text-gray-600 mb-2">₦28,000</p>
-          <button class="bg-black text-white w-full py-2 mt-2" onclick="addToCart('Leather Tote', 28000)">Add to Cart</button>
+      <div class="border rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow bg-white">
+        <img src="images/leather-tote.jpg" alt="Leather Tote" class="w-full h-72 object-cover" />
+        <div class="p-6">
+          <h4 class="text-2xl font-bold mb-3 text-pink-600">Leather Tote</h4>
+          <p class="text-gray-700 mb-4 text-lg">₦28,000</p>
+          <button class="bg-pink-600 hover:bg-pink-700 text-white w-full py-3 rounded-lg font-semibold transition-colors" onclick="addToCart('Leather Tote', 28000)">Add to Cart</button>
         </div>
       </div>
 
       <!-- Product 3 -->
-      <div class="border rounded-lg overflow-hidden shadow-sm">
-        <img src="https://images.unsplash.com/photo-1585552050313-3f2d3eab3c9b?auto=format&fit=crop&w=800&q=80" alt="Pointed Heels" class="w-full h-64 object-cover" />
-        <div class="p-4">
-          <h4 class="text-xl font-semibold mb-2">Pointed Heels</h4>
-          <p class="text-gray-600 mb-2">₦22,500</p>
-          <button class="bg-black text-white w-full py-2 mt-2" onclick="addToCart('Pointed Heels', 22500)">Add to Cart</button>
+      <div class="border rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow bg-white">
+        <img src="images/pointed-heels.jpg" alt="Pointed Heels" class="w-full h-72 object-cover" />
+        <div class="p-6">
+          <h4 class="text-2xl font-bold mb-3 text-pink-600">Pointed Heels</h4>
+          <p class="text-gray-700 mb-4 text-lg">₦22,500</p>
+          <button class="bg-pink-600 hover:bg-pink-700 text-white w-full py-3 rounded-lg font-semibold transition-colors" onclick="addToCart('Pointed Heels', 22500)">Add to Cart</button>
         </div>
       </div>
 
@@ -73,23 +78,22 @@
   </section>
 
   <!-- Cart Modal -->
-  <div id="cart" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50" onclick="closeCart()">
-    <div class="bg-white p-6 rounded shadow-md max-w-sm w-full" onclick="event.stopPropagation()">
-      <h3 class="text-xl font-semibold mb-4">Cart Summary</h3>
-      <div id="cart-items" class="mb-4 text-sm text-gray-700 whitespace-pre-wrap">Your cart is empty.</div>
-      <div class="font-bold text-right mb-4">Total: ₦<span id="total">0</span></div>
-      <button onclick="checkout()" class="bg-green-600 text-white w-full py-2">Checkout (Paystack)</button>
+  <div id="cart" class="fixed inset-0 bg-black bg-opacity-60 hidden justify-center items-center z-50" onclick="closeCart()">
+    <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full" onclick="event.stopPropagation()">
+      <h3 class="text-2xl font-extrabold mb-6 text-pink-700">Cart Summary</h3>
+      <div id="cart-items" class="mb-6 text-gray-800 text-lg max-h-48 overflow-y-auto">Your cart is empty.</div>
+      <div class="font-bold text-right mb-6 text-xl">Total: ₦<span id="total">0</span></div>
+      <button onclick="checkout()" class="bg-pink-700 hover:bg-pink-800 text-white w-full py-3 rounded-lg font-bold transition-colors">Checkout (Paystack)</button>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="text-center p-6 border-t text-sm text-gray-500">
+  <footer class="text-center p-8 border-t border-pink-300 text-pink-600 font-semibold tracking-wide">
     &copy; 2025 LUXWEAR. All rights reserved.
   </footer>
 
   <!-- Scripts -->
   <script>
-    // Initialize cart from localStorage or empty array
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function updateCartDisplay() {
@@ -147,7 +151,6 @@
       closeCart();
     }
 
-    // Update cart display on page load
     updateCartDisplay();
   </script>
 </body>
