@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUXWEAR - Fashion Boutique</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    #cart {
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="p-4 border-b flex justify-between items-center">
+    <h1 class="text-2xl font-bold tracking-wide">LUXWEAR</h1>
+    <nav>
+      <ul class="flex space-x-4">
+        <li><a href="#home" class="hover:underline">Home</a></li>
+        <li><a href="#shop" class="hover:underline">Shop</a></li>
+        <li><button onclick="toggleCart()" class="hover:underline focus:outline-none">Cart (<span id="cart-count">0</span>)</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="text-center py-32 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1602810313325-6e47d38e9e6e?auto=format&fit=crop&w=1350&q=80');">
+    <div class="bg-white bg-opacity-70 inline-block p-8 rounded">
+      <h2 class="text-4xl font-bold mb-4">Effortless Style</h2>
+      <p class="text-gray-700 mb-6">Discover curated fashion essentials for everyday elegance.</p>
+      <a href="#shop" class="bg-black text-white py-2 px-6 rounded-full">Shop Now</a>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="shop" class="py-16 px-8">
+    <h3 class="text-3xl font-semibold mb-8 text-center">New Arrivals</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+
+      <!-- Product 1 -->
+      <div class="border rounded-lg overflow-hidden shadow-sm">
+        <img src="https://images.unsplash.com/photo-1602810313013-6aa32a12280f?auto=format&fit=crop&w=800&q=80" alt="Silk Slip Dress" class="w-full h-64 object-cover" />
+        <div class="p-4">
+          <h4 class="text-xl font-semibold mb-2">Silk Slip Dress</h4>
+          <p class="text-gray-600 mb-2">₦35,000</p>
+          <button class="bg-black text-white w-full py-2 mt-2" onclick="addToCart('Silk Slip Dress', 35000)">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="border rounded-lg overflow-hidden shadow-sm">
+        <img src="https://images.unsplash.com/photo-1589987607627-41d9d49eacd1?auto=format&fit=crop&w=800&q=80" alt="Leather Tote" class="w-full h-64 object-cover" />
+        <div class="p-4">
+          <h4 class="text-xl font-semibold mb-2">Leather Tote</h4>
+          <p class="text-gray-600 mb-2">₦28,000</p>
+          <button class="bg-black text-white w-full py-2 mt-2" onclick="addToCart('Leather Tote', 28000)">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="border rounded-lg overflow-hidden shadow-sm">
+        <img src="https://images.unsplash.com/photo-1585552050313-3f2d3eab3c9b?auto=format&fit=crop&w=800&q=80" alt="Pointed Heels" class="w-full h-64 object-cover" />
+        <div class="p-4">
+          <h4 class="text-xl font-semibold mb-2">Pointed Heels</h4>
+          <p class="text-gray-600 mb-2">₦22,500</p>
+          <button class="bg-black text-white w-full py-2 mt-2" onclick="addToCart('Pointed Heels', 22500)">Add to Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Cart Modal -->
+  <div id="cart" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50" onclick="closeCart()">
+    <div class="bg-white p-6 rounded shadow-md max-w-sm w-full" onclick="event.stopPropagation()">
+      <h3 class="text-xl font-semibold mb-4">Cart Summary</h3>
+      <div id="cart-items" class="mb-4 text-sm text-gray-700 whitespace-pre-wrap">Your cart is empty.</div>
+      <div class="font-bold text-right mb-4">Total: ₦<span id="total">0</span></div>
+      <button onclick="checkout()" class="bg-green-600 text-white w-full py-2">Checkout (Paystack)</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center p-6 border-t text-sm text-gray-500">
+    &copy; 2025 LUXWEAR. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize cart from localStorage or empty array
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function updateCartDisplay() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      cartItemsContainer.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsContainer.textContent = 'Your cart is empty.';
+        document.getElementById('total').textContent = '0';
+        cartCount.textContent = '0';
+        return;
+      }
+
+      let total = 0;
+      cart.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.textContent = `${item.product} - ₦${item.price.toLocaleString()}`;
+        cartItemsContainer.appendChild(itemElement);
+        total += item.price;
+      });
+
+      document.getElementById('total').textContent = total.toLocaleString();
+      cartCount.textContent = cart.length;
+    }
+
+    function addToCart(product, price) {
+      cart.push({ product, price });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+      showCart();
+    }
+
+    function showCart() {
+      document.getElementById('cart').classList.remove('hidden');
+    }
+
+    function toggleCart() {
+      const cartModal = document.getElementById('cart');
+      if (cartModal.classList.contains('hidden')) {
+        showCart();
+      } else {
+        closeCart();
+      }
+    }
+
+    function closeCart() {
+      document.getElementById('cart').classList.add('hidden');
+    }
+
+    function checkout() {
+      alert('Redirecting to Paystack... (simulated)');
+      cart = [];
+      localStorage.removeItem('cart');
+      updateCartDisplay();
+      closeCart();
+    }
+
+    // Update cart display on page load
+    updateCartDisplay();
+  </script>
+</body>
+</html>
